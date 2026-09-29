@@ -1,8 +1,8 @@
 namespace SerialExample
 {
-    public partial class Form1 : Form
+    public partial class SerialExampleForm : Form
     {
-        public Form1()
+        public SerialExampleForm()
         {
             InitializeComponent();
         }

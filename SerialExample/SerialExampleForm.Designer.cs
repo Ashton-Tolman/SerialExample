@@ -1,6 +1,6 @@
 ﻿namespace SerialExample
 {
-    partial class Form1
+    partial class SerialExampleForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            ExitButton = new Button();
+            SuspendLayout();
+            // 
+            // ExitButton
+            // 
+            ExitButton.Location = new Point(1330, 607);
+            ExitButton.Name = "ExitButton";
+            ExitButton.Size = new Size(112, 54);
+            ExitButton.TabIndex = 0;
+            ExitButton.Text = "E&xit";
+            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.Click += this.button1_Click;
+            // 
+            // SerialExampleForm
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Text = "Form1";
+            ClientSize = new Size(1454, 673);
+            Controls.Add(ExitButton);
+            Name = "SerialExampleForm";
+            Text = "SerialExampleForm";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button ExitButton;
     }
 }
