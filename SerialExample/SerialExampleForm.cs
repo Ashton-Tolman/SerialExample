@@ -9,15 +9,22 @@ namespace SerialExample
             InitializeComponent();
         }
 
-        private SerialPort _serialPort;
-
+        SerialPort _serialPort = new SerialPort();
         void SerialPortSetup()
         {
+            _serialPort.Close();
             _serialPort.PortName = "COM5";
             _serialPort.BaudRate = 9600;
             _serialPort.DataBits = 8;
             _serialPort.Parity = Parity.None;
             _serialPort.StopBits = StopBits.None;
+
+        }
+
+        void SerialConnect()
+        {
+            _serialPort.Close();
+            _serialPort.Open();
 
         }
 
@@ -29,7 +36,8 @@ namespace SerialExample
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-
+            SerialPortSetup();
+            SerialConnect();
         }
     }
 }
