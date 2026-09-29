@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             ExitButton = new Button();
+            ConnectButton = new Button();
             SuspendLayout();
             // 
             // ExitButton
@@ -39,21 +40,35 @@
             ExitButton.TabIndex = 0;
             ExitButton.Text = "E&xit";
             ExitButton.UseVisualStyleBackColor = true;
-            ExitButton.Click += this.button1_Click;
+            ExitButton.Click += ExitButton_Click;
+            // 
+            // ConnectButton
+            // 
+            ConnectButton.Location = new Point(1212, 607);
+            ConnectButton.Name = "ConnectButton";
+            ConnectButton.Size = new Size(112, 54);
+            ConnectButton.TabIndex = 1;
+            ConnectButton.Text = "&Connect";
+            ConnectButton.UseVisualStyleBackColor = true;
+            ConnectButton.Click += ConnectButton_Click;
             // 
             // SerialExampleForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1454, 673);
+            Controls.Add(ConnectButton);
             Controls.Add(ExitButton);
             Name = "SerialExampleForm";
             Text = "SerialExampleForm";
             ResumeLayout(false);
         }
 
+
+
         #endregion
 
         private Button ExitButton;
+        private Button ConnectButton;
     }
 }
