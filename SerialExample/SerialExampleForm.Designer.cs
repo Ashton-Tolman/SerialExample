@@ -30,6 +30,8 @@
         {
             ExitButton = new Button();
             ConnectButton = new Button();
+            ReadButton = new Button();
+            SendButton = new Button();
             SuspendLayout();
             // 
             // ExitButton
@@ -52,11 +54,31 @@
             ConnectButton.UseVisualStyleBackColor = true;
             ConnectButton.Click += ConnectButton_Click;
             // 
+            // ReadButton
+            // 
+            ReadButton.Location = new Point(1094, 607);
+            ReadButton.Name = "ReadButton";
+            ReadButton.Size = new Size(112, 54);
+            ReadButton.TabIndex = 2;
+            ReadButton.Text = "&Read";
+            ReadButton.UseVisualStyleBackColor = true;
+            // 
+            // SendButton
+            // 
+            SendButton.Location = new Point(976, 607);
+            SendButton.Name = "SendButton";
+            SendButton.Size = new Size(112, 54);
+            SendButton.TabIndex = 3;
+            SendButton.Text = "&Send";
+            SendButton.UseVisualStyleBackColor = true;
+            // 
             // SerialExampleForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1454, 673);
+            Controls.Add(SendButton);
+            Controls.Add(ReadButton);
             Controls.Add(ConnectButton);
             Controls.Add(ExitButton);
             Name = "SerialExampleForm";
@@ -70,5 +92,7 @@
 
         private Button ExitButton;
         private Button ConnectButton;
+        private Button ReadButton;
+        private Button SendButton;
     }
 }
