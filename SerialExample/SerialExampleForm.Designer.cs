@@ -38,6 +38,7 @@
             StatusLabel = new ToolStripStatusLabel();
             StatusTimer = new System.Windows.Forms.Timer(components);
             PortsComboBox = new ComboBox();
+            ComListBox = new ListBox();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -87,9 +88,9 @@
             // 
             // SerialTextBox
             // 
-            SerialTextBox.Location = new Point(12, 12);
+            SerialTextBox.Location = new Point(12, 51);
             SerialTextBox.Name = "SerialTextBox";
-            SerialTextBox.Size = new Size(285, 31);
+            SerialTextBox.Size = new Size(182, 31);
             SerialTextBox.TabIndex = 4;
             // 
             // statusStrip1
@@ -116,16 +117,25 @@
             // PortsComboBox
             // 
             PortsComboBox.FormattingEnabled = true;
-            PortsComboBox.Location = new Point(12, 49);
+            PortsComboBox.Location = new Point(12, 12);
             PortsComboBox.Name = "PortsComboBox";
             PortsComboBox.Size = new Size(182, 33);
             PortsComboBox.TabIndex = 6;
+            // 
+            // ComListBox
+            // 
+            ComListBox.FormattingEnabled = true;
+            ComListBox.Location = new Point(200, 12);
+            ComListBox.Name = "ComListBox";
+            ComListBox.Size = new Size(690, 279);
+            ComListBox.TabIndex = 7;
             // 
             // SerialExampleForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(902, 386);
+            Controls.Add(ComListBox);
             Controls.Add(PortsComboBox);
             Controls.Add(statusStrip1);
             Controls.Add(SerialTextBox);
@@ -154,5 +164,6 @@
         private System.Windows.Forms.Timer StatusTimer;
         private ToolStripStatusLabel StatusLabel;
         private ComboBox PortsComboBox;
+        private ListBox ComListBox;
     }
 }
