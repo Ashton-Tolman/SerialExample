@@ -7,6 +7,7 @@ namespace SerialExample
         public SerialExampleForm()
         {
             InitializeComponent();
+            UpdatePortSelection();
         }
 
         SerialPort _serialPort = new SerialPort();
@@ -17,7 +18,8 @@ namespace SerialExample
             _serialPort.BaudRate = 9600;
             _serialPort.DataBits = 8;
             _serialPort.Parity = Parity.None;
-            _serialPort.StopBits = StopBits.None;
+            //_serialPort.StopBits = StopBits.None;
+
 
         }
 
@@ -26,6 +28,35 @@ namespace SerialExample
             _serialPort.Close();
             _serialPort.Open();
 
+        }
+
+        void SerialSend()
+        {
+            _serialPort.Write("hello world");
+        }
+
+        void SerialRead()
+        {
+            SerialTextBox.Text = _serialPort.ReadExisting();
+        }
+
+        string[] GetSerialPorts()
+        {
+            
+            return SerialPort.GetPortNames();
+        }
+
+        void UpdatePortSelection()
+        {
+            foreach (string port in GetSerialPorts())
+            {
+                PortsComboBox.Items.Add(port);
+            }
+
+            if (PortsComboBox.Items.Count > 0)
+            {
+                PortsComboBox.SelectedIndex = 0;
+            }
         }
 
         // Event Handlers Below Here---------------------------------------------------------------
@@ -38,6 +69,36 @@ namespace SerialExample
         {
             SerialPortSetup();
             SerialConnect();
+        }
+
+        private void SendButton_Click(object sender, EventArgs e)
+        {
+            SerialSend();
+        }
+
+        private void ReadButton_Click(object sender, EventArgs e)
+        {
+            SerialRead();
+        }
+
+        private void StatusTimer_Tick(object sender, EventArgs e)
+        {
+            string portName;
+            int rxBuffer, txBuffer;
+            if (_serialPort.IsOpen)
+            {
+                portName = _serialPort.PortName;
+                rxBuffer = _serialPort.BytesToRead;
+                txBuffer = _serialPort.BytesToWrite;
+            }
+            else
+            {
+                portName = "none";
+                rxBuffer = 0;
+                txBuffer = 0;
+            }
+
+            StatusLabel.Text = $"Port: {portName} tx: {txBuffer} rx: {rxBuffer}";
         }
     }
 }
