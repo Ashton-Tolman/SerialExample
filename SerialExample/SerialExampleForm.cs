@@ -11,10 +11,10 @@ namespace SerialExample
         }
 
         SerialPort _serialPort = new SerialPort();
-        void SerialPortSetup()
+        void SerialPortSetup(string portName)
         {
             _serialPort.Close();
-            _serialPort.PortName = PortsComboBox.SelectedItem.ToString();
+            _serialPort.PortName = portName;
             _serialPort.BaudRate = 9600;
             _serialPort.DataBits = 8;
             _serialPort.Parity = Parity.None;
@@ -32,7 +32,10 @@ namespace SerialExample
 
         void SerialSend()
         {
-            _serialPort.Write("hello world");
+            byte[] sender = {0x20, 0x01};
+            
+            _serialPort.Write(sender, 0, sender.Length);
+           
         }
 
         void SerialRead()
@@ -58,7 +61,10 @@ namespace SerialExample
         {
             foreach (string port in GetSerialPorts())
             {
-                PortsComboBox.Items.Add(port);
+                if (IsQyAtBoard(port))
+                {
+                    PortsComboBox.Items.Add(port);
+                }
             }
 
             if (PortsComboBox.Items.Count > 0)
@@ -74,6 +80,40 @@ namespace SerialExample
             _serialPort.Write(thingy, 0,1);
         }
 
+        bool IsQyAtBoard(string portName)
+        {
+            byte[] thingy = { 0xF0 };
+            byte[] input = new byte[1];
+            SerialPortSetup(portName);
+            SerialConnect();
+            //flush rx buffer
+            input = new byte[_serialPort.BytesToRead];
+            _serialPort.Read(input, 0, input.Length);
+
+            //request settings
+            _serialPort.Write(thingy,0,thingy.Length);
+
+            //wait for reply
+            System.Threading.Thread.Sleep(100);
+
+            //read rx buffer
+            input = new byte[_serialPort.BytesToRead];
+            _serialPort.Read(input, 0, input.Length);
+
+            //disconnect
+            _serialPort.Close();
+
+            //test if Qy@ board
+            if (input.Length == 64 && input[58] == 81 && input[59] == 121 && input[60] == 64)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // Event Handlers Below Here---------------------------------------------------------------
         private void ExitButton_Click(object sender, EventArgs e)
         {
@@ -82,7 +122,7 @@ namespace SerialExample
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            SerialPortSetup();
+            SerialPortSetup(PortsComboBox.SelectedItem.ToString());
             SerialConnect();
         }
 
